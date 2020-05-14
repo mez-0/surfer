@@ -5,11 +5,12 @@ from prompt_toolkit.history import InMemoryHistory
 from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
 from prompt_toolkit.styles import Style
 from prompt_toolkit.completion import NestedCompleter
-
+from time import sleep
 args = arguments.get_args()
 
 def start_cli():
 	session = PromptSession()
+	sleep(0.5)
 	try:
 		while True:
 			cmd = session.prompt(prompt, style=style, completer=completer)

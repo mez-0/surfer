@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 from lib import logger, arguments
 from http.server import BaseHTTPRequestHandler, HTTPServer
-
 args = arguments.get_args()
 
 class RequestHandler(BaseHTTPRequestHandler):
