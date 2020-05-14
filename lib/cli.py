@@ -22,6 +22,8 @@ def show_help():
 	for c,h in helper.items():
 		print('%-9s %s' % (c, logger.blue(h)))
 
+
+
 style = Style.from_dict({
     # User input (default text).
     '':          '#ffffff',
@@ -38,12 +40,14 @@ completer = NestedCompleter.from_nested_dict({
     'exit': None,
     'add': None,
     'delete': None,
+    'read':None,
     'generate': {'curl','wget','Invoke-WebRequest','DownloadString'}
 })
 
 helper = {
 	'list':'List the contents of the server directory',
 	'generate':'Generate download utility commands',
+	'read':'Read the contents of a file',
 	'add':'Add a file to the server directory',
 	'delete':'Delete a file from the server directory',
 	'exit':'Close Surfer.py'
