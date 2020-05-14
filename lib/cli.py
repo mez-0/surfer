@@ -20,6 +20,8 @@ prompt = [
 completer = NestedCompleter.from_nested_dict({
     'list': None,
     'exit': None,
+    'add': None,
+    'delete': None,
     'generate': {'curl','wget','Invoke-WebRequest','DownloadString'}
 })
 

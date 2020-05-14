@@ -1,5 +1,6 @@
 from lib import logger, arguments
 import os
+from shutil import copy
 
 args = arguments.get_args()
 
@@ -15,6 +16,16 @@ def do(cmd):
 		if cmd.startswith('generate '):
 			cmd = cmd.split(' ')[1]
 			generate_command(cmd)
+
+	if 'add' in cmd:
+		if cmd.startswith('add '):
+			cmd = cmd.split(' ')[1]
+			add_file(cmd)
+
+	if 'delete' in cmd:
+		if cmd.startswith('delete '):
+			cmd = cmd.split(' ')[1]
+			delete_file(cmd)
 
 def get_hosted_files():
 	hosted_path = args.directory
@@ -43,4 +54,26 @@ def generate_command(cmd):
 
 	logger.list_commands(commands)
 
+def add_file(cmd):
+	from_location = cmd
+	to_location = args.directory
+	try:
+		copy(from_location,to_location)
+		logger.msg(f'Copied {from_location} to ', to_location,'green')
+		return 0
+	except  Exception as e:
+		logger.msg('Error: ',e,'red')
+		return 1
 
+def delete_file(cmd):
+	if args.directory.endswith('/'):
+		file_to_delete = args.directory + cmd
+	else:
+		file_to_delete = args.directory + '/' + cmd
+	try:
+		os.remove(file_to_delete)
+		logger.msg(f'Deleted ', file_to_delete,'green')
+		return 0
+	except Exception as e:
+		logger.msg('Error: ',e,'red')
+		return 1
