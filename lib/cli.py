@@ -49,6 +49,7 @@ completer = NestedCompleter.from_nested_dict({
     'exit': None,
     'add': None,
     'delete': None,
+    'config':None,
     'read':get_files(),
     'generate': {
     	'curl':get_files(),
@@ -60,6 +61,7 @@ completer = NestedCompleter.from_nested_dict({
 
 helper = {
 	'list':'List the contents of the server directory',
+	'config':'Show the servers current configuration',
 	'generate':'Generate download utility commands',
 	'read':'Read the contents of a file',
 	'add':'Add a file to the server directory',

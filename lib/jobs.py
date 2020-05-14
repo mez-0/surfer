@@ -8,9 +8,8 @@ def do(cmd):
 	if 'list' in cmd:
 		get_hosted_files()
 
-	if 'exit' in cmd:
-		logger.msg('CTRL+C to kill the server!',None,'red')
-		quit()
+	if 'config' in cmd:
+		logger.msg(f'Server is currently configured to: ',f'{args.server_address}:{args.server_port}','blue')
 
 	if 'generate' in cmd:
 		if cmd.startswith('generate '):
@@ -32,6 +31,9 @@ def do(cmd):
 			cmd = cmd.split(' ')[1]
 			delete_file(cmd)
 
+	if 'exit' in cmd:
+		logger.msg('CTRL+C to kill the server!',None,'red')
+		quit()
 def get_hosted_files():
 	hosted_path = './'
 	url = f'http://{args.server_address}:{args.server_port}/'
