@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="surfer" src="https://i.imgur.com/ozdWSxP.jpg" height="140" />
+  <img alt="surfer" src="https://terrigen-cdn-dev.marvel.com/content/prod/1x/_silversurfer_card.jpg" height="140" />
   <p align="center">
     <a href="https://github.com/mez-0/surfer/releases/latest"><img alt="Release" src="https://img.shields.io/github/release/mez-0/surfer.svg?style=flat-square"></a>
     <a href="https://github.com/mez-0/surfer/blob/master/LICENSE"><img alt="Software License" src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square"></a>
