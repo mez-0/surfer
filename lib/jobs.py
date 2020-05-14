@@ -33,7 +33,7 @@ def do(cmd):
 			delete_file(cmd)
 
 def get_hosted_files():
-	hosted_path = args.directory
+	hosted_path = './'
 	url = f'http://{args.server_address}:{args.server_port}/'
 	if not os.path.exists(hosted_path):
 		logger.msg('Creating directory: ',hosted_path,'blue')
