@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
-from lib import logger
+from lib import logger, arguments
 from http.server import BaseHTTPRequestHandler, HTTPServer
+
+args = arguments.get_args()
 
 class RequestHandler(BaseHTTPRequestHandler):
     def _set_response(self):
@@ -23,15 +25,15 @@ class RequestHandler(BaseHTTPRequestHandler):
         return
 
 def start_server(server_class=HTTPServer, handler_class=RequestHandler):
-    host = '0.0.0.0'
-    port = 13004
+    host = args.server_address
+    port = args.server_port
     server_address = (host, port)
     httpd = server_class(server_address, handler_class)
     try:
         logger.msg('Listening @ ',f'http://{host}:{port}','green')
         httpd.serve_forever()
     except KeyboardInterrupt:
-        pass
+        httpd.server_close()
     finally:
         httpd.server_close()
 

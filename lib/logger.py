@@ -93,6 +93,10 @@ def request(request):
 		+ version
 		)
 
-def list(url,items):
+def list_dir(url,items):
 	for item in items:
 		print('• ' + url + green(item))
+
+def list_commands(commands):
+	for command in commands:
+		print('• ' + green(command))
